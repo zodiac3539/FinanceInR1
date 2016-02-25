@@ -1,7 +1,7 @@
 #Calculate convexcivity of a bond
-#EX) f.convexivity(maturity=10, coupon=7, discount=0.07)
+#EX) f.convexity(maturity=10, coupon=7, discount=0.07)
 
-f.convexivity = function(maturity, par=100, coupon, discount, k=1)
+f.convexity = function(maturity, par=100, coupon, discount, k=1)
 {
     real_maturity <- maturity * k
     real_coupon <- coupon / k
