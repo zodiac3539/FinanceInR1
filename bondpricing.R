@@ -1,3 +1,8 @@
+#Pricing Bond example
+#Don't need any library
+#mature = maturity, coupon: 3%@100 => 3
+#par => Normally 100. Discount: YTM
+
 f.bondprice = function (mature, coupon, par, discount)
 {
   E = NULL
