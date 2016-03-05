@@ -1,4 +1,4 @@
-#Calculate convexcivity of a bond
+#Calculate convexity of a bond
 #EX) f.convexity(maturity=10, coupon=7, discount=0.07)
 
 f.convexity = function(maturity, par=100, coupon, discount, k=1)
