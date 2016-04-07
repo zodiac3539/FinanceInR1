@@ -10,13 +10,14 @@
 library(igraph)
 
 #Define the variable
-depth<-5 #How many steps (tree depth) do you want to make
-upside_probability<-0.5 #The chance that the stop price goes up
-rate <- exp(0.02) #Risk Free rate
-volatility <- 0.2
-exercise_price <- 100
-stock_price <- 100
-
+depth<-3 #How many steps (tree depth) do you want to make
+rate <-0.02 #Risk Free rate
+volatility <- 0.35
+exercise_price <- 35
+stock_price <- 47.5
+upside_probability<-(exp(rate)-exp(-volatility))/(exp(volatility)-exp(-volatility))
+rate <- exp(rate)
+    
 total_node<-2^depth-1 #Total number of node
 G <- graph.tree(n=total_node, children=2) #I'll make a graph whose nodes are 7, and each node has two children
 stock_tree <- (1:total_node)

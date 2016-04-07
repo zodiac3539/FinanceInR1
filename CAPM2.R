@@ -6,9 +6,9 @@ library(stringr) #String manipulation
 library(calibrate) #To represent stock name on scatter plot
 
 #NASDAQ, NYSE
-market <- "NASDAQ"
+market <- "NYSE"
 #Technology, Finance, Energy, Consumer Services, Transportation, Capital Goods, Health Care, Basic Industries
-sector <- "Health Care"
+sector <- "Technology"
 
 getcapm <- function(stock) {
     #Getting data from server
@@ -28,9 +28,11 @@ getcapm <- function(stock) {
     rets <- (todayprice - yesterdayprice)/todayprice
     #Annualized and percentage 
     vol <- sd(rets) * sqrt(length(todayprice))
+    
+    #Getting Geometric Mean.
+    #You might be tempted to use just mean(). Don't do that in stock market.
     geometric_mean_return_prep <- rets + 1
     geometric_mean_return_prep <-  data.frame(Date=time(geometric_mean_return_prep), geometric_mean_return_prep, check.names=FALSE, row.names=NULL)
-    #geometric_mean_return <- exp(mean(log(geometric_mean_return_prep)))
     geometric_mean_return = 1
     
     for(i in 1:length(geometric_mean_return_prep)) {
@@ -40,7 +42,7 @@ getcapm <- function(stock) {
     
     geometric_mean_return <- geometric_mean_return -1
     
-    information <- c(geometric_mean_return, vol)
+    information <- c(geometric_mean_return, vol) #It's a trick to return multiple values in one return.
     return(information)
 }
 
@@ -93,6 +95,12 @@ main_name <- paste(market, " / ")
 main_name <- paste(main_name, sector)
 main_name <- paste(main_name, " in Mar 2015")
 
+capm_regression<-lm(capm$geometric_return ~ capm$volatility)
+
 plot(x=capm$volatility,y=capm$geometric_return,pch=19, main = main_name, xlab="Stock Volatility", ylab="Stock Return")
 #I want to know which stock is outlier.
 textxy(capm$volatility, capm$geometric_return, capm$ticker)
+abline(capm_regression, col="red") # regression line (y~x)
+
+print(summary(capm_regression))
+
