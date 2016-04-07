@@ -14,3 +14,9 @@ Duration
 Bond Convexity
 Foreign Exchange
 Bond YTM
+CAPM
+Single regression on Stock
+Machine Learning - K-nearest
+Machine Learning - Classification Tree.
+
+You can also see the explanation for these code through www.mbaprogrammer.com
